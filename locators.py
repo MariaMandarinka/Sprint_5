@@ -10,26 +10,30 @@ class StellarBurgersLocators:
     REG_LOGIN_LINK = (By.XPATH, ".//a[text()='Войти']")
 
     # --- СТРАНИЦА ВХОДА (АВТОРИЗАЦИИ) ---
-    LOGIN_EMAIL_INPUT = (By.CSS_SELECTOR, "input[type='text']")
-    LOGIN_PASSWORD_INPUT = (By.CSS_SELECTOR, "input[type='password']")
+    # ИСПРАВЛЕНО: Заменили неработающие CSS/XPath на надежный поиск по атрибуту name
+    LOGIN_EMAIL_INPUT = (By.XPATH, ".//input[@name='name']")
+    LOGIN_PASSWORD_INPUT = (By.XPATH, ".//input[@name='Пароль']")
+    
     LOGIN_SUBMIT_BUTTON = (By.XPATH, ".//button[text()='Войти']")
+    LOGIN_REG_LINK = (By.XPATH, ".//a[text()='Зарегистрироваться']")
+    
+    # ДОБАВЛЕНО: Локатор для перехода на страницу восстановления пароля из формы входа
+    LOGIN_FORGOT_PASSWORD_LINK = (By.XPATH, ".//a[@href='/forgot-password']")
 
     # --- ГЛАВНАЯ СТРАНИЦА ---
     MAIN_LOGIN_BUTTON = (By.XPATH, ".//button[text()='Войти в аккаунт']")
-    HEADER_PROFILE_BUTTON = (By.XPATH, ".//p[text()='Личный кабинет']")
+    HEADER_PROFILE_BUTTON = (By.XPATH, ".//a[@href='/account']")
     HEADER_CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[text()='Конструктор']")
-    HEADER_LOGO = (By.XPATH, ".//div[contains(@class, 'AppHeader_header__logo')]")
+    # ИСПРАВЛЕНО: Добавили поиск ссылки внутри блока логотипа, чтобы клик не уходил в пустоту
+    HEADER_LOGO = (By.XPATH, ".//div[contains(@class, 'AppHeader_header_logo')]//a")
     MAIN_ORDER_BUTTON = (By.XPATH, ".//button[text()='Оформить заказ']")
-    
-    # НОВЫЕ ЛОКАТОРЫ ДЛЯ ВЫХОДА И ВКЛАДОК КОНСТРУКТОРА
+
+    # --- НОВЫЕ ЛОКАТОРЫ ДЛЯ ВЫХОДА И ВКЛАДОК КОНСТРУКТОРA ---
     LOGOUT_BUTTON = (By.XPATH, ".//button[text()='Выйти']")
-    TAB_BUNS = (By.XPATH, ".//span[text()='Булки']")
-    TAB_SAUCES = (By.XPATH, ".//span[text()='Соусы']")
-    TAB_FILLINGS = (By.XPATH, ".//span[text()='Начинки']")
+    TAB_BUNS_CONTAINER = (By.XPATH, ".//span[text()='Булки']/..")
+    TAB_SAUCES_CONTAINER = (By.XPATH, ".//span[text()='Соусы']/..")
+    TAB_FILLINGS_CONTAINER = (By.XPATH, ".//span[text()='Начинки']/..")
 
     # --- СТРАНИЦА ВОССТАНОВЛЕНИЯ ПАРОЛЯ ---
     FORGOT_PASSWORD_LOGIN_LINK = (By.XPATH, ".//a[text()='Войти']")
 
-# --- КОНСТАНТА ---
-class StellarBurgersUrls:
-    BASE_URL = "https://stellarburgers.education-services.ru"
